@@ -3,7 +3,7 @@ set -e
 
 cd $(dirname $0)/..
 
-if ! command -v golangci-lint; then
+if  command -v golangci-lint; then
     echo Skipping validation: no golangci-lint available
     exit
 fi

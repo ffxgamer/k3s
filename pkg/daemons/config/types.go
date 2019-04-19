@@ -18,6 +18,7 @@ type Node struct {
 	FlannelIface             *net.Interface
 	LocalAddress             string
 	Containerd               Containerd
+        ConfigTemplate           string
 	Images                   string
 	AgentConfig              Agent
 	CACerts                  []byte

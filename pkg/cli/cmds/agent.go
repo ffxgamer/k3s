@@ -12,6 +12,7 @@ type Agent struct {
 	TokenFile                string
 	ServerURL                string
 	ResolvConf               string
+	ContainerdConfig         string
 	DataDir                  string
 	NodeIP                   string
 	NodeName                 string
@@ -81,6 +82,11 @@ var (
 		Usage: "(agent) Customized flag for kube-proxy process",
 		Value: &AgentConfig.ExtraKubeProxyArgs,
 	}
+	ContainerdConfig = cli.StringFlag{
+		Name:        "containerd-config-template,D",
+		Usage:       "Use Custom Containerd config file",
+		Destination: &AgentConfig.ContainerdConfig,
+	}
 )
 
 func NewAgentCommand(action func(ctx *cli.Context) error) cli.Command {
@@ -113,6 +119,12 @@ func NewAgentCommand(action func(ctx *cli.Context) error) cli.Command {
 				Usage:       "Folder to hold state",
 				Destination: &AgentConfig.DataDir,
 				Value:       "/var/lib/rancher/k3s",
+			},
+			cli.StringFlag{
+				Name:        "containerd-config-template,D",
+				Usage:       "Use Custom Containerd config file",
+				Destination: &AgentConfig.ContainerdConfig,
+				Value:       "",
 			},
 			cli.StringFlag{
 				Name:        "cluster-secret",
